@@ -1,0 +1,350 @@
+/* Layout: noite de cafeteria numa página contínua, sem linhas separando as partes. Serifa elegante com itálico laranja, grãos 3D vagando no topo, copo gelado conduzido pelo scroll, bebidas, cardápio em lista, pratos em cartões que se empilham, galeria dos cantos e rodapé com o nome grande */
+:root{
+  --bg:#120e0c;
+  --surface:#1d1714;
+  --line:#33291f;
+  --fg:#f4ece4;
+  --muted:#a89584;
+  --accent:#ff7a1a;
+  --glow:rgba(255,140,50,.10);
+  --ink:#1c140f;
+  --d1:#2e1b11;--d2:#6e3a20;--d3:#c0916a;--d4:#e8dbcc;--d5:#8a4424;
+  --serif:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --wide:"Archivo", "Arial Black", system-ui, sans-serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;overflow-x:hidden}
+::selection{background:var(--accent);color:#1b0f06}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1 em,h2 em,h3 em{color:var(--accent)}
+p,figure{margin:0}
+a{color:inherit}
+a:focus-visible,button:focus-visible,.gal:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:72rem;margin:0 auto}
+.label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#1b0f06;font-weight:600;text-decoration:none;padding:12px 20px;border-radius:999px;width:fit-content;border:0;font:inherit;font-weight:600;cursor:pointer;transition:transform .3s var(--ease),background-color .3s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:inherit;border:1px solid currentColor}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+h2{font-size:clamp(44px,8vw,84px)}
+
+/* Revelação ao rolar: só entra em ação quando o JavaScript marca o elemento, abaixo da primeira tela */
+[data-rv]{transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s var(--ease)}
+.rv-pre{opacity:0;transform:translateY(28px);filter:blur(8px)}
+
+/* Topo */
+.top{display:flex;justify-content:space-between;align-items:center;padding-block:14px;position:relative;z-index:2}
+.top .mark{font-family:var(--serif);font-size:24px}
+.top nav{display:flex;gap:18px;font-size:14px}
+.top nav a{text-decoration:none;color:var(--muted);transition:color .25s;padding-block:11px;margin-block:-11px}
+.top nav a:hover{color:var(--fg)}
+@media (max-width:560px){.top nav{gap:14px}.top nav a:not(.wa):not(.keep){display:none}}
+.top nav a.wa{color:var(--fg);border-bottom:1px solid var(--accent)}
+
+/* Hero com grãos */
+.hero{position:relative;overflow:hidden;padding-block:48px 72px;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:80%;height:140%;z-index:-1;
+  background:linear-gradient(115deg,transparent 30%,rgba(255,226,190,.07) 45%,rgba(255,226,190,.02) 60%,transparent 70%);pointer-events:none}
+.hero::after{content:"";position:absolute;left:-20%;bottom:-40%;width:90%;height:90%;z-index:-2;background:radial-gradient(closest-side,var(--glow),transparent);pointer-events:none}
+#beans{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.hero h1{font-size:clamp(52px,12vw,128px);max-width:11ch}
+.hero .lead{margin-top:24px;font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:36ch}
+.hero .row{margin-top:28px}
+.hero .tags{margin-top:44px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero .tags span{display:inline-flex;align-items:center;gap:8px}
+.hero .tags span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent)}
+
+/* Faixa de itens passando */
+.marquee{overflow:hidden;padding-block:18px 26px;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mtrack{display:flex;width:max-content;animation:mq 38s linear infinite}
+.mtrack span{font-family:var(--serif);font-style:italic;font-size:clamp(28px,4.4vw,44px);color:color-mix(in oklab,var(--fg) 82%,transparent);white-space:nowrap;display:inline-flex;align-items:center}
+.mtrack span::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);margin:0 clamp(18px,3vw,34px)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* Bebidas: palco colorido que entra pela onda logo depois da faixa de itens */
+.drinks{position:relative;height:420svh;z-index:2}
+.dstage{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--d1);color:var(--fg);transition:color .7s ease;touch-action:pan-y}
+.dstage[data-tone="light"]{color:var(--ink)}
+/* a cor de fundo muda numa camada só dela, para não redesenhar os textos do palco a cada quadro */
+.dbg{position:absolute;inset:0;z-index:0;background:var(--d1);will-change:background-color}
+.dstage h2 em{color:#ffb27a}
+.dstage[data-tone="light"] h2 em{color:#7a2c00}
+.dstage .dtop{position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);left:0;right:0;display:flex;justify-content:space-between;align-items:baseline;gap:12px;z-index:5}
+.dstage .dtop h2{font-size:clamp(26px,5vw,40px)}
+.dstage .dtop .label{color:inherit;opacity:.85}
+.words{position:absolute;left:0;right:0;top:26%;transform:translateY(-50%);height:1.2em;font-family:var(--wide);font-weight:900;font-stretch:110%;
+  font-size:clamp(70px,21vw,260px);line-height:1;text-align:center;z-index:1;pointer-events:none}
+.words span{position:absolute;left:0;right:0;top:50%;margin-top:-.5em;line-height:1;white-space:nowrap;opacity:0;will-change:transform,opacity}
+.words span:first-child{opacity:.95}
+#dcv{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+.dinfo{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);z-index:5;display:grid;gap:14px}
+.dinfo .txt{display:grid;gap:6px;max-width:26rem;min-height:5.2em}
+.dinfo .txt b{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1}
+.dinfo .txt span{opacity:.88;font-size:15px}
+.dinfo .spec{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;font-variant-numeric:tabular-nums}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+@media (min-width:900px){
+  .words{top:20%}
+  .dinfo{bottom:calc(env(safe-area-inset-bottom,0px) + 36px);gap:18px}
+  .dinfo .txt{max-width:32rem}
+  .dinfo .txt b{font-size:clamp(40px,3.6vw,60px)}
+  .dinfo .txt span{font-size:17px}
+  .dinfo .spec{font-size:13px}
+  .chips button{font-size:15px;padding:8px 16px}
+}
+.chips button{font:inherit;font-size:13px;color:inherit;background:transparent;border:1px solid color-mix(in oklab,currentColor 30%,transparent);border-radius:999px;padding:6px 12px;cursor:pointer}
+.chips button.on{background:currentColor}
+.chips button.on span{color:var(--d1)}
+.dstage[data-tone="light"] .chips button.on span{color:var(--d4)}
+
+/* tudo depois da frase fica por cima das cenas fixas, com o mesmo fundo escuro */
+.dishes,.feat,.menu,.papteaser,.corners,.ev,.visit,.foot{position:relative;z-index:3;background:var(--bg)}
+
+/* Frase que acende */
+.reveal{position:relative;padding-block:160px;margin-top:-100svh;z-index:3;isolation:isolate;background:var(--bg)}
+.reveal .bgimg{position:absolute;inset:0;z-index:-1;background:linear-gradient(var(--bg),rgba(18,14,12,.72) 30%,rgba(18,14,12,.72) 70%,var(--bg)),url(../img/fundo-ambiente-960.webp) center/cover no-repeat,var(--surface)}
+@media (min-width:761px){.reveal .bgimg{background:linear-gradient(var(--bg),rgba(18,14,12,.72) 30%,rgba(18,14,12,.72) 70%,var(--bg)),url(../img/fundo-ambiente-1920.webp) center/cover no-repeat,var(--surface)}}
+.reveal p{font-family:var(--serif);font-size:clamp(40px,8.5vw,96px);line-height:1.04;max-width:16ch}
+.reveal p span{color:color-mix(in oklab,var(--fg) 30%,transparent);transition:color .35s ease}
+.reveal p span.lit{color:var(--fg)}
+.reveal p span.lit.hi{color:var(--accent);font-style:italic}
+
+/* Cardápio em lista: foto pequena redonda, categoria, nome e descrição */
+.dishes{padding-block:96px 72px;position:relative;isolation:isolate;overflow-x:clip}
+.dishes::before{content:"";position:absolute;right:-10%;top:10%;width:60%;height:60%;z-index:-1;background:radial-gradient(closest-side,var(--glow),transparent);pointer-events:none}
+.dhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:36px}
+.tabs{position:relative;display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{position:relative;z-index:1;font:inherit;font-size:14px;color:var(--muted);background:transparent;border:0;border-radius:999px;padding:8px 16px;cursor:pointer;transition:color .3s ease;white-space:nowrap}
+.tabs button:hover{color:var(--fg)}
+.tabs button[aria-selected="true"]{color:var(--bg)}
+.tab-ind{position:absolute;left:4px;top:4px;bottom:4px;width:0;border-radius:999px;background:var(--fg)}
+.tabs.ready .tab-ind{transition:transform .42s var(--ease),width .42s var(--ease)}
+.plates{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,26rem),1fr));gap:14px}
+.plate{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;min-width:0;padding:14px;border-radius:18px;
+  background:color-mix(in oklab,var(--surface) 70%,transparent);border:1px solid color-mix(in oklab,var(--fg) 6%,transparent);transition:border-color .3s,background-color .3s}
+.plate:hover{border-color:color-mix(in oklab,var(--accent) 40%,transparent)}
+.plate .disc{width:clamp(76px,22vw,104px);aspect-ratio:1;border-radius:50%;overflow:hidden;box-shadow:0 18px 30px -14px rgba(0,0,0,.8),0 0 0 4px var(--bg);
+  transition:transform 1s var(--ease)}
+.plate .disc img{width:100%;height:100%;object-fit:cover;display:block}
+.plate.pre .disc{transform:rotate(-35deg) scale(.86)}
+.ptxt{display:grid;gap:4px;min-width:0}
+.plate h3{font-size:clamp(24px,5.6vw,30px)}
+.plate p{color:var(--muted);font-size:15px}
+.plate .tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.dishes .note{margin-top:28px;color:var(--muted);font-size:14px}
+
+/* Destaques: cartões que se empilham enquanto a página rola */
+.feat{padding-block:72px 40px}
+.fhead{display:grid;gap:12px;margin-bottom:36px}
+.fhead p{color:var(--muted);max-width:40ch}
+.stack{display:grid;gap:28px}
+.fcard{position:sticky;top:calc(env(safe-area-inset-top,0px) + 70px);display:grid;grid-template-columns:1fr;border-radius:22px;overflow:hidden;
+  background:var(--surface);border:1px solid color-mix(in oklab,var(--fg) 8%,transparent);box-shadow:0 -20px 50px -20px rgba(0,0,0,.7);transform-origin:50% 0;will-change:transform}
+.fcard:nth-child(2){top:calc(env(safe-area-inset-top,0px) + 86px)}
+.fcard:nth-child(3){top:calc(env(safe-area-inset-top,0px) + 102px)}
+.fimg{aspect-ratio:4/3;overflow:hidden}
+.fimg img{width:100%;height:100%;object-fit:cover;display:block}
+.ftxt{padding:22px 22px 26px;display:grid;gap:10px;align-content:center}
+.fnum{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.ftxt h3{font-size:clamp(36px,7vw,64px)}
+.ftxt p{color:var(--muted);max-width:36ch}
+@media (min-width:760px){
+  .fcard{grid-template-columns:1.1fr 1fr;min-height:62svh}
+  .fimg{aspect-ratio:auto;height:100%}
+  .ftxt{padding:48px}
+}
+
+/* Cardápio completo: grupos em colunas, nome e descrição à esquerda, preço à direita ligado por pontilhado */
+.menu{padding-block:96px 40px;position:relative;isolation:isolate;overflow-x:clip}
+.menu::before{content:"";position:absolute;left:-15%;top:20%;width:60%;height:60%;z-index:-1;background:radial-gradient(closest-side,var(--glow),transparent);pointer-events:none}
+.mhead{display:grid;gap:12px;margin-bottom:44px}
+.mhead p{color:var(--muted);max-width:46ch}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,21rem),1fr));gap:40px 48px}
+.mcat h3,.mcat h2{font-size:clamp(30px,6vw,40px);font-style:italic;color:var(--accent);padding-bottom:12px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+.mcat ul{list-style:none;margin:0;padding:0}
+.mcat li{display:flex;align-items:baseline;gap:10px;padding:12px 0}
+.mi{display:grid;gap:2px;flex:1;min-width:0;position:relative}
+.mi b{font-weight:600;font-size:16px;display:flex;align-items:baseline;gap:10px}
+.mi b::after{content:"";flex:1;border-bottom:1px dotted color-mix(in oklab,var(--fg) 26%,transparent);transform:translateY(-4px);min-width:16px}
+.mi i{font-style:normal;color:var(--muted);font-size:14px}
+.mp{font-family:var(--serif);font-size:22px;white-space:nowrap;font-variant-numeric:tabular-nums;align-self:start;line-height:1.1}
+
+/* Resumo do cardápio na inicial: o grupo dos cafés e o convite para o cardápio completo */
+.mteaser{display:grid;gap:28px 48px;align-items:start}
+.mmore{display:grid;gap:16px;align-content:center;padding:26px;border-radius:20px;background:color-mix(in oklab,var(--surface) 70%,transparent);border:1px solid color-mix(in oklab,var(--fg) 6%,transparent)}
+.mmore p{color:var(--muted)}
+@media (min-width:860px){.mteaser{grid-template-columns:1.2fr 1fr}}
+
+/* Resumo da papelaria na inicial */
+.papteaser{padding-block:72px 24px}
+.ptstrip{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:28px}
+.ptstrip img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:18px;display:block;background:var(--surface)}
+@media (min-width:760px){.ptstrip{grid-template-columns:repeat(4,1fr)}}
+
+/* Páginas internas: abertura curta, barra de categorias presa no topo e grupos */
+.sub .top .mark{text-decoration:none}
+.top nav a[aria-current="page"]{color:var(--fg)}
+.phero{padding-block:40px 28px;position:relative;isolation:isolate;overflow-x:clip}
+.phero::before{content:"";position:absolute;right:-20%;top:-40%;width:80%;height:160%;z-index:-1;background:radial-gradient(closest-side,var(--glow),transparent);pointer-events:none}
+.phero h1{font-size:clamp(48px,11vw,112px);max-width:12ch;margin:12px 0 18px}
+.phero p{color:var(--muted);max-width:44ch}
+.catnav{position:sticky;top:0;z-index:20;padding-block:10px;background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid color-mix(in oklab,var(--fg) 6%,transparent)}
+.cats{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cats a{flex:none;text-decoration:none;font-size:14px;color:var(--muted);padding:8px 14px;border-radius:999px;border:1px solid var(--line);transition:color .25s,background-color .25s,border-color .25s}
+.cats a:hover{color:var(--fg)}
+.cats a.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.sub .menu{padding-block:36px 72px}
+.mcat h3,.mcat h2,.pgroup h2{scroll-margin-top:84px}
+.pcta{margin-top:56px;display:grid;gap:16px;padding:26px;border-radius:20px;background:color-mix(in oklab,var(--surface) 70%,transparent);border:1px solid color-mix(in oklab,var(--fg) 6%,transparent)}
+.pcta p{font-family:var(--serif);font-size:clamp(26px,5vw,36px);line-height:1.1;max-width:24ch}
+
+/* Papelaria: grade de produtos com foto, nome, descrição e preço */
+.pap{padding-block:36px 72px}
+.pgroup+.pgroup{margin-top:56px}
+.pgroup h2{font-size:clamp(34px,6.5vw,52px);font-style:italic;color:var(--accent);margin-bottom:22px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));gap:16px}
+.pcard{display:grid;grid-template-rows:auto 1fr;border-radius:18px;overflow:hidden;background:color-mix(in oklab,var(--surface) 70%,transparent);border:1px solid color-mix(in oklab,var(--fg) 6%,transparent);transition:border-color .3s}
+.pcard:hover{border-color:color-mix(in oklab,var(--accent) 40%,transparent)}
+.pimg{aspect-ratio:1;overflow:hidden;background:var(--surface)}
+.pimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s var(--ease)}
+.pcard:hover .pimg img{transform:scale(1.04)}
+.ptx{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:16px 16px 18px;align-content:start}
+.ptx h3{font-size:26px;grid-column:1}
+.ptx p{color:var(--muted);font-size:14px;grid-column:1}
+.ptx .mp{grid-column:2;grid-row:1/span 2}
+
+/* Impressão do cardápio: fundo branco, sem barras nem botões */
+@media print{
+  :root{--bg:#fff;--fg:#111;--muted:#555;--accent:#9a3d06;--line:#ccc}
+  body{background:#fff;color:#111}
+  header,.catnav,.pcta,.foot{display:none!important}
+  .phero{padding:0 0 12px}.phero::before,.menu::before{display:none}
+  .phero h1{font-size:40px}
+  .mgrid{grid-template-columns:1fr 1fr;gap:18px 36px}
+  .mcat{break-inside:avoid}
+  .rv-pre{opacity:1!important;transform:none!important;filter:none!important}
+}
+
+/* Cantos: galeria de cartões altos que rola de lado */
+.corners{padding-block:96px 24px}
+.chead{margin-bottom:28px}
+.chead h2{margin-top:12px}
+.gal{display:grid;grid-auto-flow:column;grid-auto-columns:min(78vw,24rem);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:4px max(16px,calc((100% - 72rem)/2)) 18px;scroll-padding-inline:max(16px,calc((100% - 72rem)/2));scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.gcard{position:relative;scroll-snap-align:start;border-radius:20px;overflow:hidden;aspect-ratio:3/4;background:var(--surface)}
+.gcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s var(--ease)}
+.gcard:hover img{transform:scale(1.04)}
+.gcard figcaption{position:absolute;left:0;right:0;bottom:0;padding:60px 18px 18px;display:grid;gap:4px;background:linear-gradient(transparent,rgba(12,9,8,.88))}
+.gcard b{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1}
+.gcard span{color:color-mix(in oklab,var(--fg) 78%,transparent);font-size:14px}
+
+/* Eventos */
+.ev{padding-block:72px}
+.ev h2{margin:12px 0 28px}
+.evs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:16px}
+.evc{background:color-mix(in oklab,var(--surface) 70%,transparent);border:1px solid color-mix(in oklab,var(--fg) 6%,transparent);border-radius:18px;padding:22px;display:grid;gap:8px;min-width:0}
+.evc h3{font-size:34px}
+.evc p{color:var(--muted)}
+
+/* Visite: no escuro, texto ao lado da foto */
+.visit{padding-block:96px;position:relative;isolation:isolate;overflow-x:clip}
+.visit::before{content:"";position:absolute;left:-10%;top:0;width:70%;height:80%;z-index:-1;background:radial-gradient(closest-side,var(--glow),transparent);pointer-events:none}
+.vgrid{display:grid;gap:36px}
+.vtxt{display:grid;gap:22px;align-content:start}
+.visit h2{font-size:clamp(48px,9vw,96px);max-width:12ch}
+.hours{width:100%;max-width:30rem;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.hours td{padding:10px 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:right}
+.hours tr.today td{font-weight:600}
+.hours tr.today td:first-child::after{content:" · hoje";color:var(--accent);font-weight:600}
+.addr{display:grid;gap:12px;align-content:start}
+.addr .big{font-family:var(--serif);font-size:34px;line-height:1.05}
+.addr p{color:var(--muted)}
+.vimg{border-radius:22px;overflow:hidden;align-self:stretch;min-height:320px}
+.vimg img{width:100%;height:100%;object-fit:cover;display:block}
+@media (min-width:860px){.vgrid{grid-template-columns:1fr 1fr;gap:56px}}
+
+/* Rodapé com o nome grande */
+.foot{padding-block:40px 28px;overflow:hidden}
+.fnav{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px}
+.fnav a{text-decoration:none;color:var(--muted);transition:color .25s;padding-block:10px;margin-block:-10px}
+.fnav a:hover{color:var(--fg)}
+.fmark{font-family:var(--serif);font-size:clamp(120px,32vw,420px);line-height:.8;letter-spacing:-.03em;margin:28px 0 18px;color:color-mix(in oklab,var(--fg) 16%,var(--bg))}
+.fine{font-size:13px;color:var(--muted)}
+
+/* Abertura com o copo (versão de teste): vídeo em quadros num canvas, preso à tela enquanto a seção rola */
+.cup{position:relative;height:600svh}
+@media (max-width:767px){.cup{height:450svh}}
+.cstage{--c-ink:#1c140f;--c-soft:#2e1c10;--c-em:#6b2400;position:sticky;top:0;height:100svh;overflow:hidden;background:#a87848;color:var(--c-ink)}
+#cupcv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+.cglow{position:absolute;left:50%;top:-6%;width:min(1100px,130vw);height:62%;transform:translateX(-50%);z-index:1;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(240,216,184,.62),rgba(240,216,184,.3) 55%,transparent)}
+.cshade{position:absolute;inset:0;z-index:2;opacity:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,rgba(20,10,5,.42),rgba(20,10,5,.78))}
+.cfade{position:absolute;left:0;right:0;bottom:0;height:42%;z-index:3;opacity:0;pointer-events:none;background:linear-gradient(transparent,var(--bg))}
+/* topo dentro do palco: escuro sobre o fundo caramelo, claro no fim */
+.ctop{position:absolute;top:0;left:0;right:0;z-index:6;padding-top:env(safe-area-inset-top,0px);background:linear-gradient(rgba(222,192,152,.7),rgba(222,192,152,.55) 60%,transparent);transition:background .4s ease}
+.ctop .top nav a{color:var(--c-soft);transition:color .3s}
+.ctop .top nav a:hover{color:var(--c-ink)}
+.ctop .top nav a.wa{color:var(--c-ink);border-bottom-color:var(--c-em)}
+.ctop .mark{color:var(--c-ink);transition:color .3s}
+.cstage[data-tone="dark"]{--c-ink:var(--fg);--c-soft:color-mix(in oklab,var(--fg) 80%,transparent);--c-em:var(--accent)}
+.cstage[data-tone="dark"] .ctop{background:linear-gradient(rgba(18,14,12,.5),transparent)}
+/* título e botões, centralizados acima do copo */
+.cintro{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 76px);z-index:4;display:grid;justify-items:center;gap:22px;text-align:center}
+.chero{display:grid;justify-items:center;gap:14px;will-change:transform,opacity}
+.chero .label{color:var(--c-soft);font-size:12px}
+.chero h1{font-size:clamp(40px,6.2vw,92px);max-width:15ch;color:var(--c-ink)}
+.chero h1 em{color:var(--c-em)}
+.chero .lead{font-size:clamp(16px,1.6vw,19px);color:var(--c-soft);max-width:38ch}
+.chero .row{justify-content:center;margin-top:4px}
+.chero .btn{background:var(--c-ink);color:#f4ece4}
+.chero .btn.ghost{background:transparent;color:var(--c-ink);border:1px solid color-mix(in oklab,var(--c-ink) 55%,transparent)}
+@media (min-width:1100px){.chero h1{max-width:none}}
+/* as quatro palavras: em linha abaixo dos botões; no scroll vão para o lado de um grão, ligadas por um traço */
+.ctags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 20px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c-ink)}
+.ctags li{display:inline-flex;align-items:center;gap:8px;will-change:transform,opacity}
+.ctags li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--c-em);transition:width .35s var(--ease),height .35s,border-radius .35s}
+.ctags li.dir::before{width:24px;height:1px;border-radius:0;background:var(--c-ink)}
+.ctags li.esq{flex-direction:row-reverse}
+.ctags li.esq::before{width:24px;height:1px;border-radius:0;background:var(--c-ink)}
+/* texto final, sobre a espuma girando */
+.cfinal{position:absolute;inset:0;z-index:4;display:grid;place-content:center;justify-items:center;gap:18px;text-align:center;color:var(--fg);opacity:0;visibility:hidden;will-change:transform,opacity}
+.cfinal .label{color:color-mix(in oklab,var(--fg) 82%,transparent)}
+.cfinal h2{font-size:clamp(40px,6.4vw,96px);max-width:14ch;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.cscroll{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 22px);z-index:4;display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--c-ink);
+  /* brilho claro e suave atrás do texto, para ele não perder contraste na parte escura do vídeo */
+  padding:10px 14px;margin:-10px -14px;background:radial-gradient(closest-side,rgba(222,192,152,.6),rgba(222,192,152,.35) 70%,transparent)}
+.cscroll::after{content:"";width:40px;height:1px;background:currentColor}
+.cload{position:absolute;left:0;right:0;bottom:0;height:2px;z-index:6;transition:opacity .6s ease}
+.cload i{display:block;height:100%;background:color-mix(in oklab,var(--c-ink) 55%,transparent);transform-origin:left;transform:scaleX(0);transition:transform .3s linear}
+.cload.done{opacity:0}
+@media (max-width:767px){
+  .cintro{top:calc(env(safe-area-inset-top,0px) + 66px);gap:16px}
+  .chero{gap:10px}
+  .chero .lead{max-width:30ch}
+  .ctags{gap:6px 14px;font-size:11px}
+}
+@media (max-height:700px) and (max-width:767px){.chero .lead{display:none}}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .plate.pre .disc{transform:none}
+  .words span{transition:none;filter:none}
+  .tabs.ready .tab-ind,.tabs button{transition:none}
+  .mtrack{animation:none}
+  .rv-pre{opacity:1;transform:none;filter:none}
+}
+
+/* atalho de teclado: aparece só quando recebe o foco, para pular o menu */
+.skip{position:fixed;left:16px;top:12px;z-index:100;background:var(--accent);color:#1b0f06;font-weight:600;text-decoration:none;padding:10px 16px;border-radius:999px;transform:translateY(-160%);transition:transform .2s}
+.skip:focus{transform:none}

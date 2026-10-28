@@ -1,0 +1,11 @@
+# fotos e vídeos de origem: pesados demais para o repositório; só a lista de créditos vai junto
+originais/*
+!originais/CREDITOS.md
+
+# configuração local do Claude Code (servidor de teste)
+.claude/
+
+# arquivos do sistema
+Thumbs.db
+desktop.ini
+.DS_Store

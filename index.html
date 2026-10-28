@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Café</title>
+<meta name="description" content="Cafeteria de bairro com cafés, doces, salgados, almoço e papelaria. Site de exemplo.">
+<meta property="og:title" content="Café">
+<meta property="og:description" content="Cafeteria de bairro com cafés, doces, salgados, almoço e papelaria. Site de exemplo.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://coffee-one-delta-90.vercel.app/">
+<meta property="og:image" content="https://coffee-one-delta-90.vercel.app/img/compartilhar.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Salão de cafeteria com janela grande, com o nome Café">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://coffee-one-delta-90.vercel.app/">
+<meta name="theme-color" content="#120e0c">
+<link rel="icon" href="img/icone.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@110,900&family=Figtree:wght@400;600&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="preload" as="fetch" crossorigin href="frames/desktop/frame_0001.webp" media="(min-width: 768px)">
+<link rel="preload" as="fetch" crossorigin href="frames/mobile/frame_0001.webp" media="(max-width: 767px)">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/copo.js" defer></script>
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<main id="conteudo">
+
+<!-- Abertura com o copo: vídeo quadro a quadro conduzido pelo scroll (js/copo.js) -->
+<section class="cup" id="inicio">
+  <div class="cstage" id="cstage" data-tone="light">
+    <canvas id="cupcv" role="img" aria-label="Copo de café preto com linhas douradas: a tampa sobe, o café é servido e a câmera entra no copo até a espuma girando"></canvas>
+    <div class="cglow" id="cglow" aria-hidden="true"></div>
+    <div class="cshade" id="cshade" aria-hidden="true"></div>
+    <header class="ctop gut"><div class="wrap top">
+      <span class="mark">Café</span>
+      <nav><a href="#bebidas">Bebidas</a><a class="keep" href="cardapio.html">Cardápio</a><a class="keep" href="papelaria.html">Papelaria</a><a href="#visite">Visite</a><a class="wa" href="#visite">Contato</a></nav>
+    </div></header>
+    <div class="cintro gut">
+      <div class="chero" id="chero">
+        <span class="label">Cafeteria de bairro</span>
+        <h1>Um café para <em>desacelerar</em> o dia.</h1>
+        <p class="lead">Espressos, doces e um lugar tranquilo para ficar mais um pouco.</p>
+        <div class="row"><a class="btn" href="#bebidas">Ver bebidas</a><a class="btn ghost" href="#visite">Como chegar</a></div>
+      </div>
+      <ul class="ctags" id="ctags"><li>Café</li><li>Doces</li><li>Salgados</li><li>Almoço</li></ul>
+    </div>
+    <div class="cfinal gut" id="cfinal">
+      <span class="label">Do balcão para a xícara</span>
+      <h2>Tirado na hora, do jeito que você <em>prefere</em>.</h2>
+      <a class="btn" href="#bebidas">Escolher a bebida</a>
+    </div>
+    <span class="cscroll" id="cscroll" aria-hidden="true">Role</span>
+    <span class="cload" id="cload" aria-hidden="true"><i id="cbar"></i></span>
+    <div class="cfade" id="cfade" aria-hidden="true"></div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="mtrack" id="mtrack"><span>Espresso</span><span>Cappuccino</span><span>Croissant</span><span>Latte</span><span>Bolo da casa</span><span>Gelado</span><span>Torrada</span><span>Macchiato</span><span>Massa ao sugo</span></div>
+</div>
+
+<section class="drinks" id="bebidas">
+  <div class="dstage" id="dstage" data-tone="dark">
+    <div class="dbg" id="dbg" aria-hidden="true"></div>
+    <div class="dtop gut"><h2>Como você <em>prefere</em>?</h2><span class="label" id="dcount">1 / 5</span></div>
+    <div class="words" id="dwords" aria-hidden="true"></div>
+    <canvas id="dcv" role="img"></canvas>
+    <div class="dinfo gut">
+      <div class="txt" aria-live="polite"><span class="spec" id="dspec"></span><b id="dname"></b><span id="ddesc"></span></div>
+      <div class="chips" id="dchips"></div>
+    </div>
+  </div>
+</section>
+
+<section class="reveal gut">
+  <div class="bgimg" aria-hidden="true"></div>
+  <div class="wrap"><p id="rv">Manhãs sem pressa, cantos aconchegantes e um café para ficar mais um pouco.</p></div>
+</section>
+
+<section class="dishes gut" id="pratos"><div class="wrap">
+  <div class="dhead" data-rv>
+    <div><span class="label">Do balcão</span><h2>Para comer <em>junto</em>.</h2></div>
+    <div class="tabs" role="tablist" aria-label="Categorias">
+      <button role="tab" aria-selected="true" data-f="all">Tudo</button>
+      <button role="tab" aria-selected="false" data-f="doce">Doces</button>
+      <button role="tab" aria-selected="false" data-f="salgado">Salgados</button>
+      <button role="tab" aria-selected="false" data-f="almoco">Almoço</button>
+    </div>
+  </div>
+  <div class="plates" id="plates">
+    <article class="plate" data-c="doce"><div class="disc"><img src="img/prato-croissant-avela-480.webp" width="480" height="480" loading="lazy" decoding="async" alt="Croissant coberto com creme de avelã, morangos e lascas de amêndoa, num prato branco"></div><div class="ptxt"><span class="tag">Doce</span><h3>Croissant com <em>avelã</em></h3><p>Croissant folhado coberto com creme de avelã e morango fresco.</p></div></article>
+    <article class="plate" data-c="doce"><div class="disc"><img src="img/prato-bolo-480.webp" width="480" height="480" loading="lazy" decoding="async" alt="Fatia de bolo de chocolate em camadas, com calda escorrendo no prato"></div><div class="ptxt"><span class="tag">Doce</span><h3>Bolo da <em>casa</em></h3><p>Bolos inteiros ou em fatia, com cobertura feita na casa.</p></div></article>
+    <article class="plate" data-c="salgado"><div class="disc"><img src="img/prato-croissant-recheado-480.webp" width="480" height="480" loading="lazy" decoding="async" alt="Croissants recheados com presunto, ao lado de dois copos de suco de laranja"></div><div class="ptxt"><span class="tag">Salgado</span><h3>Croissant <em>recheado</em></h3><p>Recheio salgado, servido com suco natural.</p></div></article>
+    <article class="plate" data-c="salgado"><div class="disc"><img src="img/prato-torrada-480.webp" width="480" height="480" loading="lazy" decoding="async" alt="Torrada com folhas verdes e brotos, com uma xícara de café ao fundo"></div><div class="ptxt"><span class="tag">Salgado</span><h3>Torrada da <em>tarde</em></h3><p>Pão tostado com folhas, para acompanhar o café.</p></div></article>
+    <article class="plate" data-c="almoco"><div class="disc"><img src="img/prato-massa-480.webp" width="480" height="480" loading="lazy" decoding="async" alt="Espaguete com molho de tomate e folhas de manjericão, num prato branco"></div><div class="ptxt"><span class="tag">Almoço</span><h3>Massa ao <em>sugo</em></h3><p>Massa com molho de tomate e manjericão.</p></div></article>
+    <article class="plate" data-c="doce"><div class="disc"><img src="img/prato-milkshake-480.webp" width="480" height="480" loading="lazy" decoding="async" alt="Milkshake rosado em copo alto, com chantilly e um morango por cima"></div><div class="ptxt"><span class="tag">Doce</span><h3><em>Milkshake</em></h3><p>Frutas vermelhas, chantilly e calda.</p></div></article>
+  </div>
+  <p class="note">Itens de exemplo. Fotos, nomes e preços reais entram aqui.</p>
+</div></section>
+
+<section class="feat gut" id="destaques"><div class="wrap">
+  <div class="fhead" data-rv><span class="label">Da cozinha</span><h2>Três pratos para <em>começar</em>.</h2><p>Feitos na casa, para acompanhar o café.</p></div>
+  <div class="stack">
+    <article class="fcard"><div class="fimg"><img src="img/prato-massa-960.webp" width="960" height="960" loading="lazy" decoding="async" alt="Espaguete com molho de tomate e folhas de manjericão, num prato branco"></div>
+      <div class="ftxt"><span class="fnum">01 / Almoço</span><h3>Massa ao <em>sugo</em></h3><p>Massa com molho de tomate e manjericão.</p></div></article>
+    <article class="fcard"><div class="fimg"><img src="img/prato-croissant-avela-960.webp" width="960" height="960" loading="lazy" decoding="async" alt="Croissant coberto com creme de avelã, morangos e lascas de amêndoa, num prato branco"></div>
+      <div class="ftxt"><span class="fnum">02 / Doce</span><h3>Croissant com <em>avelã</em></h3><p>Croissant folhado coberto com creme de avelã e morango fresco.</p></div></article>
+    <article class="fcard"><div class="fimg"><img src="img/prato-milkshake-960.webp" width="960" height="960" loading="lazy" decoding="async" alt="Milkshake rosado em copo alto, com chantilly e um morango por cima"></div>
+      <div class="ftxt"><span class="fnum">03 / Doce</span><h3><em>Milkshake</em></h3><p>Frutas vermelhas, chantilly e calda.</p></div></article>
+  </div>
+</div></section>
+
+<section class="menu gut" id="cardapio"><div class="wrap">
+  <div class="mhead" data-rv><span class="label">Cardápio</span><h2>Tudo o que sai do <em>balcão</em>.</h2><p>Cafés, gelados, chás, doces, salgados e almoço. Cardápio e preços de exemplo.</p></div>
+  <div class="mteaser">
+    <section class="mcat" data-rv aria-labelledby="m-cafes"><h3 id="m-cafes">Cafés</h3><ul>
+      <li><span class="mi"><b>Espresso</b><i>Curto e encorpado.</i></span><span class="mp">R$ 7</span></li>
+      <li><span class="mi"><b>Espresso duplo</b><i>Duas doses na mesma xícara.</i></span><span class="mp">R$ 10</span></li>
+      <li><span class="mi"><b>Macchiato</b><i>Leite, espresso e espuma por cima, no copo.</i></span><span class="mp">R$ 9</span></li>
+      <li><span class="mi"><b>Cappuccino</b><i>Espresso, leite vaporizado e espuma.</i></span><span class="mp">R$ 13</span></li>
+      <li><span class="mi"><b>Latte</b><i>Espresso com bastante leite.</i></span><span class="mp">R$ 14</span></li>
+      <li><span class="mi"><b>Mocha</b><i>Espresso, chocolate e leite vaporizado.</i></span><span class="mp">R$ 15</span></li>
+      <li><span class="mi"><b>Coado do dia</b><i>Café filtrado, servido na jarra.</i></span><span class="mp">R$ 12</span></li>
+    </ul></section>
+    <div class="mmore" data-rv><p>Mais cinco grupos no cardápio completo, com descrições e preços.</p><a class="btn" href="cardapio.html">Ver cardápio completo</a></div>
+  </div>
+</div></section>
+
+<section class="corners" id="cantos"><div class="wrap gut">
+  <div class="chead" data-rv><span class="label">Os cantos da casa</span><h2>Escolha o seu <em>lugar</em>.</h2></div>
+</div>
+  <div class="gal" tabindex="0" aria-label="Fotos dos cantos da casa">
+    <figure class="gcard" data-rv><img src="img/canto-salao-800.webp" srcset="img/canto-salao-800.webp 800w, img/canto-salao-1600.webp 1600w" sizes="(min-width: 760px) 30vw, 78vw" width="800" height="500" loading="lazy" decoding="async" alt="Salão com mesas de madeira e luminárias acesas, com luz entrando pela janela"><figcaption><b>Salão</b><span>Mesas para conversar, trabalhar ou só olhar a rua.</span></figcaption></figure>
+    <figure class="gcard" data-rv><img src="img/canto-varanda-800.webp" srcset="img/canto-varanda-800.webp 800w, img/canto-varanda-1600.webp 1600w" sizes="(min-width: 760px) 30vw, 78vw" width="800" height="500" loading="lazy" decoding="async" alt="Mesas e cadeiras de vime ao ar livre, ao lado de uma oliveira em vaso"><figcaption><b>Varanda</b><span>Mesas ao ar livre para as tardes mais frescas.</span></figcaption></figure>
+    <figure class="gcard" data-rv><img src="img/canto-balcao-800.webp" srcset="img/canto-balcao-800.webp 800w, img/canto-balcao-1600.webp 1600w" sizes="(min-width: 760px) 30vw, 78vw" width="800" height="500" loading="lazy" decoding="async" alt="Espresso escorrendo da máquina para uma xícara branca"><figcaption><b>Balcão</b><span>Onde o café é tirado na hora, à vista de quem pede.</span></figcaption></figure>
+    <figure class="gcard" data-rv><img src="img/canto-para-levar-800.webp" srcset="img/canto-para-levar-800.webp 800w, img/canto-para-levar-1600.webp 1600w" sizes="(min-width: 760px) 30vw, 78vw" width="800" height="500" loading="lazy" decoding="async" alt="Copo de café e saco de papel para viagem apoiados numa escada de pedra"><figcaption><b>Para levar</b><span>Cafés e doces embalados para viagem.</span></figcaption></figure>
+  </div>
+</section>
+
+<section class="papteaser gut" id="papelaria"><div class="wrap">
+  <div class="mhead" data-rv><span class="label">Papelaria</span><h2>Também tem <em>papelaria</em>.</h2><p>Cadernos, agendas, canetas e outros itens para levar junto com o café. Itens de exemplo.</p></div>
+  <div class="ptstrip">
+    <img data-rv src="img/pap-caderno-400.webp" width="400" height="400" loading="lazy" decoding="async" alt="Caderno verde-claro de capa dura com elástico preto e uma caneta por cima">
+    <img data-rv src="img/pap-agenda-400.webp" width="400" height="400" loading="lazy" decoding="async" alt="Agenda com capa de tecido florido sobre um fundo amarelo">
+    <img data-rv src="img/pap-canetas-400.webp" width="400" height="400" loading="lazy" decoding="async" alt="Seis canetas de ponta fina coloridas sobre um caderno aberto">
+    <img data-rv src="img/pap-washi-400.webp" width="400" height="400" loading="lazy" decoding="async" alt="Rolos de fita decorativa quadriculada sobre papel kraft">
+  </div>
+  <a class="btn" href="papelaria.html" data-rv>Ver papelaria</a>
+</div></section>
+
+<section class="ev gut"><div class="wrap">
+  <div data-rv><span class="label">Agenda</span><h2>Eventos na <em>casa</em></h2></div>
+  <div class="evs">
+    <div class="evc" data-rv><span class="label">Encontros</span><h3>Clube de <em>leitura</em></h3><p>Exemplo de evento recorrente. Datas e detalhes entram aqui.</p></div>
+    <div class="evc" data-rv><span class="label">Programação</span><h3>Próximos <em>eventos</em></h3><p>Espaço para divulgar a programação do mês.</p></div>
+  </div>
+</div></section>
+
+<section class="visit gut" id="visite"><div class="wrap vgrid">
+  <div class="vtxt" data-rv>
+    <span class="label">Visite</span>
+    <h2>Vem sentar com a gente <em>um pouco</em>.</h2>
+    <table class="hours" id="hours">
+      <tr data-d="1"><td>Segunda a sexta</td><td>07:00 – 19:00</td></tr>
+      <tr data-d="6"><td>Sábado</td><td>08:00 – 18:00</td></tr>
+      <tr data-d="0"><td>Domingo</td><td>08:00 – 14:00</td></tr>
+    </table>
+    <div class="addr">
+      <span class="big">Rua Exemplo, 100<br>Bairro, Cidade – UF</span>
+      <p>Endereço, telefone e redes sociais de exemplo.</p>
+      <div class="row">
+        <a class="btn" href="#visite">Falar no WhatsApp</a>
+        <a class="btn ghost" href="#visite">Abrir no mapa</a>
+      </div>
+    </div>
+  </div>
+  <div class="vimg" data-rv><img src="img/canto-salao-800.webp" srcset="img/canto-salao-800.webp 800w, img/canto-salao-1600.webp 1600w" sizes="(min-width: 860px) 46vw, 100vw" width="800" height="500" loading="lazy" decoding="async" alt="Salão com mesas de madeira e luminárias acesas, com luz entrando pela janela"></div>
+</div></section>
+
+</main>
+
+<footer class="foot gut"><div class="wrap">
+  <nav class="fnav" aria-label="Rodapé"><a href="#bebidas">Bebidas</a><a href="#pratos">Pratos</a><a href="cardapio.html">Cardápio</a><a href="papelaria.html">Papelaria</a><a href="#cantos">Cantos</a><a href="#visite">Visite</a></nav>
+  <p class="fmark" aria-hidden="true">Café</p>
+  <p class="fine">Protótipo de site para cafeteria. Fotos ilustrativas de banco de imagens, a serem trocadas pelas fotos da casa.</p>
+</div></footer>
+
+</body>
+</html>
