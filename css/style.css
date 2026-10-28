@@ -49,19 +49,6 @@ h2{font-size:clamp(44px,8vw,84px)}
 @media (max-width:560px){.top nav{gap:14px}.top nav a:not(.wa):not(.keep){display:none}}
 .top nav a.wa{color:var(--fg);border-bottom:1px solid var(--accent)}
 
-/* Hero com grãos */
-.hero{position:relative;overflow:hidden;padding-block:48px 72px;isolation:isolate}
-.hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:80%;height:140%;z-index:-1;
-  background:linear-gradient(115deg,transparent 30%,rgba(255,226,190,.07) 45%,rgba(255,226,190,.02) 60%,transparent 70%);pointer-events:none}
-.hero::after{content:"";position:absolute;left:-20%;bottom:-40%;width:90%;height:90%;z-index:-2;background:radial-gradient(closest-side,var(--glow),transparent);pointer-events:none}
-#beans{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
-.hero h1{font-size:clamp(52px,12vw,128px);max-width:11ch}
-.hero .lead{margin-top:24px;font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:36ch}
-.hero .row{margin-top:28px}
-.hero .tags{margin-top:44px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.hero .tags span{display:inline-flex;align-items:center;gap:8px}
-.hero .tags span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent)}
-
 /* Faixa de itens passando */
 .marquee{overflow:hidden;padding-block:18px 26px;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .mtrack{display:flex;width:max-content;animation:mq 38s linear infinite}
@@ -283,8 +270,8 @@ h2{font-size:clamp(44px,8vw,84px)}
 .fine{font-size:13px;color:var(--muted)}
 
 /* Abertura com o copo (versão de teste): vídeo em quadros num canvas, preso à tela enquanto a seção rola */
-.cup{position:relative;height:600svh}
-@media (max-width:767px){.cup{height:450svh}}
+.cup{position:relative;height:550svh}
+@media (max-width:767px){.cup{height:410svh}}
 .cstage{--c-ink:#1c140f;--c-soft:#2e1c10;--c-em:#6b2400;position:sticky;top:0;height:100svh;overflow:hidden;background:#a87848;color:var(--c-ink)}
 #cupcv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
 .cglow{position:absolute;left:50%;top:-6%;width:min(1100px,130vw);height:62%;transform:translateX(-50%);z-index:1;pointer-events:none;
