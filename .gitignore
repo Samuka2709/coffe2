@@ -9,3 +9,6 @@ originais/*
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# grafo local do graphify
+graphify-out/
